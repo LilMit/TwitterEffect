@@ -18,7 +18,13 @@ public class Person {
 		this.personName = personName;
 		this.occupation = occupation;
 	}
+	
+	public Person(String personName) {
+		this.personName = personName;
+	}
+	
 	/**
+	 *
 	 * @return the personName
 	 */
 	public String getPersonName() {

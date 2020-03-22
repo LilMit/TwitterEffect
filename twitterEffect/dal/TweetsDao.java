@@ -4,8 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
@@ -43,7 +42,7 @@ public class TweetsDao {
 			insertStmt = connection.prepareStatement(insertTweet);
 			insertStmt.setString(1, tweet.getLinkToTweet());
 			insertStmt.setDate(2, tweet.getTweetDate());
-			insertStmt.setTimestamp(3, tweet.getTweetTime());
+			insertStmt.setTime(3, tweet.getTweetTime());
 			insertStmt.setString(4, tweet.getContent());
 			insertStmt.setInt(5, tweet.getRetweets());
 			insertStmt.setString(6, tweet.getPersonName());
@@ -142,7 +141,7 @@ public class TweetsDao {
 			if(results.next()) {
 				String resultLinkToTweet = results.getString("LinkToTweet");
 				Date tweetDate = results.getDate("TweetDate");
-				Timestamp tweetTime = results.getTimestamp("TweetTime");
+				Time tweetTime = results.getTime("TweetTime");
 				String content = results.getString("Content");
 				int retweets = results.getInt("Retweets");			
 				String userName = results.getString("UserName");
@@ -187,7 +186,7 @@ public class TweetsDao {
 			while(results.next()) {
 				String linkToTweet = results.getString("LinkToTweet");
 				Date tweetDate = results.getDate("TweetDate");
-				Timestamp tweetTime = results.getTimestamp("TweetTime");
+				Time tweetTime = results.getTime("TweetTime");
 				String content = results.getString("Content");
 				int retweets = results.getInt("Retweets");			
 				String resultUserName = results.getString("UserName");

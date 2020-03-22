@@ -1,6 +1,6 @@
 package twitterEffect.model;
 
-import java.sql.Timestamp;
+import java.sql.Time;
 import java.sql.Date;
 
 public class ObamaTweets extends Tweets {
@@ -8,7 +8,7 @@ public class ObamaTweets extends Tweets {
 	protected int Likes;
 	protected String TweetImageURL;
 	
-	public ObamaTweets(String linkToTweet, Date tweetDate, Timestamp tweetTime, String content, int retweets,
+	public ObamaTweets(String linkToTweet, Date tweetDate, Time tweetTime, String content, int retweets,
 			String personName, String userName, int likes, String tweetImageURL) {
 		super(linkToTweet, tweetDate, tweetTime, content, retweets, personName);
 		this.UserName = userName;

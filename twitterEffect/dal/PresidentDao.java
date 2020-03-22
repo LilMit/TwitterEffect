@@ -28,7 +28,7 @@ public class PresidentDao  extends PersonDao {
 		// Insert into the superclass table first.
 		create(new Person(president.getPersonName(),"President"));
 
-		String insertPresident = "INSERT INTO President(Party) VALUES(?);";
+		String insertPresident = "INSERT INTO President(PersonName,Party) VALUES(?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		try {

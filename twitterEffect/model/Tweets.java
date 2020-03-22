@@ -1,18 +1,17 @@
 package twitterEffect.model;
 
 import java.sql.Time;
-import java.sql.Timestamp;
 import java.sql.Date;
 
 public class Tweets {
 	protected String LinkToTweet;
 	protected Date TweetDate;
-	protected Timestamp TweetTime;
+	protected Time TweetTime;
 	protected String Content;
 	protected int Retweets;
 	protected String PersonName;
 	
-	public Tweets(String linkToTweet, Date tweetDate, Timestamp tweetTime, String content, int retweets,
+	public Tweets(String linkToTweet, Date tweetDate, Time tweetTime, String content, int retweets,
 			String personName) {
 		this.LinkToTweet = linkToTweet;
 		this.TweetDate = tweetDate;
@@ -42,11 +41,11 @@ public class Tweets {
 		this.TweetDate = tweetDate;
 	}
 
-	public Timestamp getTweetTime() {
+	public Time getTweetTime() {
 		return TweetTime;
 	}
 
-	public void setTweetTime(Timestamp tweetTime) {
+	public void setTweetTime(Time tweetTime) {
 		this.TweetTime = tweetTime;
 	}
 
