@@ -69,37 +69,6 @@ public class CalendarDatesDao {
 	}
 
 	/**
-	 * Update the Content of the CalendarDates instance.
-	 * This runs a UPDATE statement.
-	 */
-	public CalendarDates updateOccupation(CalendarDates calendarDate, String occupation) throws SQLException {
-		String updateOcc = "UPDATE CalendarDates SET Occupation=? WHERE CalendarDatesName=?;";
-		Connection connection = null;
-		PreparedStatement updateStmt = null;
-		try {
-			connection = connectionManager.getConnection();
-			updateStmt = connection.prepareStatement(updateOcc);
-			updateStmt.setString(1, occupation);
-			updateStmt.setString(2, calendarDate.getCalendarDatesName());
-			updateStmt.executeUpdate();
-			
-			// Update the calendarDate param before returning to the caller.
-			calendarDate.setOccupation(occupation);;
-			return calendarDate;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw e;
-		} finally {
-			if(connection != null) {
-				connection.close();
-			}
-			if(updateStmt != null) {
-				updateStmt.close();
-			}
-		}
-	}
-
-	/**
 	 * Delete the CalendarDatess instance.
 	 * This runs a DELETE statement.
 	 */
