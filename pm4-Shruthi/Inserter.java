@@ -38,13 +38,13 @@ public class Inserter {
 		//Dates
 
 		//Here are 2 date formats --> dates and timestamps
-		SimpleDateFormat dateformat = new SimpleDateFormat("dd-M-yyyy");
+		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-M-dd");
 		SimpleDateFormat dateformat1 = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 
 		String strdate1 = "02-04-2013 11:35:42";
 		String strdate2 = "10-20-2015 11:35:42";
 		String strdate3 = "07-28-2016 11:35:42";
-		String strdate4 = "02-12-2017 11:35:42";
+		String strdate4 = "2013-04-10";
 		String strdate5 = "01-04-2018 11:35:42";
 		String strdate6 = "07-28-2019 11:35:42";
 
@@ -62,10 +62,10 @@ public class Inserter {
 		// INSERT objects from our model.
 		StockIndex stockIndex1 = new StockIndex("sop", "S&P Composite");
 		IndexDailySummary indexDailySummary1 = new IndexDailySummary(date1, stockIndex1,
-				(float) 1719.29,(float) 1728.1,(float) 1703.52,(float) 1719.2,(float) 1719.2, 21659L, 150000);
+				(float) 1719.29,(float) 1728.1,(float) 1703.52,(float) 1719.2,(float) 1719.2, 21659L, 900000);
 		StockCompanies stockCompany1 = new StockCompanies("SHRUTHI", "Shruthi's Company", 12340987278378L, MarketCapGroupType.MEDIUM, "healthcare", stockIndex1);
 		StockCompanyDailySummary stockCompanyDailySummary1 = new StockCompanyDailySummary(stockCompany1, date2,
-				(float)1234.5, (float)1234.77, (float)2372.21, (float)2377.32, 123456789876L, 12);
+				(float)1234.5, (float)1234.77, (float)2372.21, (float)2377.32, 123456789876L, 900001);
 		
 		//Create Statements
 		stockIndex1 = stockIndexDao.create(stockIndex1);
@@ -88,12 +88,14 @@ public class Inserter {
 		StockIndex s1 = stockIndexDao.getStockIndexByIndexTicker(stockIndex1.getIndexTicker());
 		System.out.format("Reading stock index: IndTick:%s IndName:%s \n", s1.getIndexTicker(), s1.getIndexName());
 
-		List<IndexDailySummary> idsList1 = indexDailySummaryDao.getIndexDailySummaryForADate(date4);
-		for(IndexDailySummary ids : idsList1) {
-			System.out.format("Looping index daily summaries: sd:%s it:%s open:%s high:%s low:%s close:%s adjclose:%s "
-					+ "volume:%s summaryId:%s \n", ids.getSummaryDate(), ids.getOpen(), ids.getHigh(), ids.getLow(),
-					ids.getClose(), ids.getAdjClose(), ids.getVolume(), ids.getSummaryId());
-		}
+		IndexDailySummary ids1 = indexDailySummaryDao.getIndexDailySummaryForADate(date4);
+		System.out.format("Reading index daily summaries:"
+				+ " sd:%s it:%s open:%s high:%s low:%s close:%s adjclose:%s "
+				+ "volume:%s summaryId:%d \n", 
+				ids1.getSummaryDate(), ids1.getStockIndex().getIndexTicker(), 
+				ids1.getOpen(), ids1.getHigh(), ids1.getLow(),
+				ids1.getClose(), ids1.getAdjClose(), ids1.getVolume(), ids1.getSummaryId());		
+
 
 	}
 }
