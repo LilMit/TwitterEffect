@@ -49,7 +49,7 @@ public class TweetsDelete extends HttpServlet {
             messages.put("title", "Invalid LinkToTweet");
             messages.put("disableSubmit", "true");
         } else {
-        	// Delete the BlogUser.
+        	// Delete the Tweet.
 	        Tweets tweet = new Tweets(linkToTweet);
 	        try {
 	        	tweet = tweetsDao.delete(tweet);

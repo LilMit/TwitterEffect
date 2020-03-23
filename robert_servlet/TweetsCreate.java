@@ -19,10 +19,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import twitterEffect.servlet.String;
 
 
-@WebServlet("/usercreate")
+@WebServlet("/tweetcreate")
 public class TweetsCreate extends HttpServlet {
 	
 	protected TweetsDao tweetsDao;
@@ -66,6 +65,7 @@ public class TweetsCreate extends HttpServlet {
 			String content = req.getParameter("Content");
 			String retweets = req.getParameter("Retweets");		
 			String personName = req.getParameter("PersonName");
+			
         	try {
         		tDate = dateFormat.parse(tweetDate);
         	} catch (ParseException e) {
@@ -74,7 +74,7 @@ public class TweetsCreate extends HttpServlet {
         	}
 	        try {
 	        	// Exercise: parse the input for StatusLevel.
-	        	Tweets tweet = new Tweets(linkToTweet,tDate,tweetTime,content,retweets,personName);
+	        	Tweets tweet = new Tweets(linkToTweet,tDate,tTime,content,retweets,personName);
 	        	tweet = tweetsDao.create(tweet);
 	        	messages.put("success", "Successfully created " + linkToTweet);
 	        } catch (SQLException e) {
@@ -85,4 +85,5 @@ public class TweetsCreate extends HttpServlet {
         
         req.getRequestDispatcher("/TweetsCreate.jsp").forward(req, resp);
     }
+
 }
