@@ -5,7 +5,10 @@ import twitterEffect.model.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import review.model.Companies;
 
 public class StockIndexDao {
 	protected ConnectionManager connectionManager;
@@ -72,6 +75,71 @@ public class StockIndexDao {
 				deleteStmt.close();
 			}
 		}
+	}
+	
+	//Update indexname given indexticker
+	public StockIndex updateIndexName(StockIndex stockIndex, String newName) throws SQLException {
+		String updateStockIndexName = "UPDATE StockIndex SET IndexName=? WHERE IndexTicker=?;";
+		Connection connection = null;
+		PreparedStatement updateStmt = null;
+		try {
+			connection = connectionManager.getConnection();
+			updateStmt = connection.prepareStatement(updateStockIndexName);
+			updateStmt.setString(1, newName);
+			updateStmt.setString(2, stockIndex.getIndexTicker());
+			updateStmt.executeUpdate();
+
+			stockIndex.setIndexName(newName);
+			return stockIndex;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(updateStmt != null) {
+				updateStmt.close();
+			}
+		}
+	}
+	
+	//get stock index given index name
+	public StockIndex getStockIndexByIndexTicker(String indexTicker) throws SQLException {
+		String selectStockIndex =
+			"SELECT IndexTicker, IndexName " +
+			"FROM StockIndex " +
+			"WHERE IndexTicker=?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectStockIndex);
+			selectStmt.setString(1, indexTicker);
+			results = selectStmt.executeQuery();
+			
+			if(results.next()) {
+				String resultIndexTicker = results.getString("IndexTicker");
+				String indexName = results.getString("IndexName");				
+				StockIndex stockIndex = new StockIndex(resultIndexTicker, indexName);
+				return stockIndex;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return null;
 	}
 	
 }

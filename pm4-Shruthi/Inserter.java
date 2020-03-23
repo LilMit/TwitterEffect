@@ -68,6 +68,13 @@ public class Inserter {
 		indexDailySummary1 = indexDailySummaryDao.create(indexDailySummary1);
 		stockCompany1 = stockCompaniesDao.create(stockCompany1);
 		stockCompanyDailySummary1 = stockCompanyDailySummaryDao.create(stockCompanyDailySummary1);
+
+		//Update Statements
+		stockIndexDao.updateIndexName(stockIndex1, "newStockIndex");
+		
+		//Read Statements
+		StockIndex s1 = stockIndexDao.getStockIndexByIndexTicker(stockIndex1.getIndexTicker());
+		System.out.format("Reading stock index: IndTick:%s IndName:%s \n", s1.getIndexTicker(), s1.getIndexName());
 	
 	
 		//Delete Statements
