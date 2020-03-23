@@ -95,7 +95,7 @@ public class StockCompaniesDao {
 
 	//Update Company Name
 	public StockCompanies updateCompanyName(StockCompanies stockCompanies, String newCompanyName) throws SQLException {
-		String updateCompanyName = "UPDATE StockCompanies SET CompanyName=? WHERE CompanyTicker=?;";
+		String updateCompanyName = "UPDATE StockCompanies SET Company=? WHERE CompanyTicker=?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
 		try {

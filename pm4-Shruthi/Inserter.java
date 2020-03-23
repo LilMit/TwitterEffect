@@ -63,7 +63,7 @@ public class Inserter {
 		StockIndex stockIndex1 = new StockIndex("sop", "S&P Composite");
 		IndexDailySummary indexDailySummary1 = new IndexDailySummary(date1, stockIndex1,
 				(float) 1719.29,(float) 1728.1,(float) 1703.52,(float) 1719.2,(float) 1719.2, 21659L, 900000);
-		StockCompanies stockCompany1 = new StockCompanies("SHRUTHI", "Shruthi's Company", 12340987278378L, MarketCapGroupType.MEDIUM, "healthcare", stockIndex1);
+		StockCompanies stockCompany1 = new StockCompanies("SHRUTHI", "Shruthi's Company", 12340987278378L, MarketCapGroupType.Medium, "healthcare", stockIndex1);
 		StockCompanyDailySummary stockCompanyDailySummary1 = new StockCompanyDailySummary(stockCompany1, date2,
 				(float)1234.5, (float)1234.77, (float)2372.21, (float)2377.32, 123456789876L, 900001);
 		
@@ -75,14 +75,16 @@ public class Inserter {
 	
 	
 		//Delete Statements
-		//stockIndexDao.delete(stockIndex1);
-		//indexDailySummaryDao.delete(indexDailySummary1);
-		//stockCompaniesDao.delete(stockCompany1);
-		//stockCompanyDailySummaryDao.delete(stockCompanyDailySummary1);
+//		stockIndexDao.delete(stockIndex1);
+//		indexDailySummaryDao.delete(indexDailySummary1);
+//		stockCompaniesDao.delete(stockCompany1);
+//		stockCompanyDailySummaryDao.delete(stockCompanyDailySummary1);
 		
 		//Update Statements
 		stockIndexDao.updateIndexName(stockIndex1, "newStockIndex");
 		indexDailySummaryDao.updatePrices(indexDailySummary1, 3.2f, 3.2f, 3.2f, 3.2f, 3.2f);
+		stockCompaniesDao.updateCompanyName(stockCompany1, "thebettercompanyname");
+		stockCompanyDailySummaryDao.updatePrices(stockCompanyDailySummary1, 6.7f, 7.7f, 5.6f, 5.4f);
 		
 		//Read Statements
 		StockIndex s1 = stockIndexDao.getStockIndexByIndexTicker(stockIndex1.getIndexTicker());
@@ -95,7 +97,7 @@ public class Inserter {
 				ids1.getSummaryDate(), ids1.getStockIndex().getIndexTicker(), 
 				ids1.getOpen(), ids1.getHigh(), ids1.getLow(),
 				ids1.getClose(), ids1.getAdjClose(), ids1.getVolume(), ids1.getSummaryId());
-				
+		
 		StockCompanies sc1 = stockCompaniesDao.getCompanyByCompanyTicker("AA");
 		System.out.format("Reading stock companies: CompanyTicker:%s Company:%s MarketCap:%s MarketCapGroup:%s Sector:%s IndexTicker:%s\n", 
 				sc1.getCompanyTicker(), sc1.getCompany(), sc1.getMarketCap(), sc1.getMarketCapGroup(), 
@@ -114,6 +116,32 @@ public class Inserter {
 					sc.getCompanyTicker(), sc.getCompany(), sc.getMarketCap(), sc.getMarketCapGroup(), 
 					sc.getSector(), sc.getStockIndex().getIndexTicker());
 			}
+		
+		StockCompanyDailySummary scds1 = stockCompanyDailySummaryDao.getStockCompanyDailySummaryById(2);
+		System.out.format("Reading stock company daily summary: CompanyTicker:%s SummaryDate:%s "
+				+ "OpenPrice:%s High:%s Low:%s ClosePrice:%s Volume:%s SummaryId:%s\n", 
+				scds1.getStockCompany().getCompanyTicker(), scds1.getSummaryDate(),
+				scds1.getOpenPrice(), scds1.getHigh(), scds1.getLow(), scds1.getClosePrice(),
+				scds1.getVolume(), scds1.getSummaryId());
+		
+		List<StockCompanyDailySummary> scdsList1 = stockCompanyDailySummaryDao.getStockCompanyDailySummaryByDate(date4);
+		for(StockCompanyDailySummary scds : scdsList1) {
+			System.out.format("Looping stock company daily summary by date: CompanyTicker:%s SummaryDate:%s "
+					+ "OpenPrice:%s High:%s Low:%s ClosePrice:%s Volume:%s SummaryId:%s\n", 
+					scds.getStockCompany().getCompanyTicker(), scds.getSummaryDate(),
+					scds.getOpenPrice(), scds.getHigh(), scds.getLow(), scds.getClosePrice(),
+					scds.getVolume(), scds.getSummaryId());
+			}
+
+		List<StockCompanyDailySummary> scdsList2 = stockCompanyDailySummaryDao.getStockCompanyDailySummaryByCompanyTicker("AAPL");
+		for(StockCompanyDailySummary scds: scdsList2) {
+			System.out.format("Looping stock company daily summary by companyticker: CompanyTicker:%s SummaryDate:%s "
+					+ "OpenPrice:%s High:%s Low:%s ClosePrice:%s Volume:%s SummaryId:%s\n", 
+					scds.getStockCompany().getCompanyTicker(), scds.getSummaryDate(),
+					scds.getOpenPrice(), scds.getHigh(), scds.getLow(), scds.getClosePrice(),
+					scds.getVolume(), scds.getSummaryId());
+			}
+
 
 	}
 }
