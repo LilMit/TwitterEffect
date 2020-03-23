@@ -15,7 +15,7 @@
 		<h1>Search for a Person by Occupation</h1>
 		<p>
 			<label for="occupation">Occupation</label>
-			<input id="occupation" name="occupation" value="${fn:escapeXml(param.occupation)}">
+			<input id="occupation" name="occupation" value="${fn:escapeXml(param.Occupation)}">
 		</p>
 		<p>
 			<input type="submit">
@@ -34,12 +34,12 @@
                 <th>Delete Person</th>
                 <th>Update Person</th>
             </tr>
-            <c:forEach items="${persons}" var="person" >
+            <c:forEach items="${person}" var="person" >
                 <tr>
                     <td><c:out value="${person.getPersonName()}" /></td>
                     <td><c:out value="${person.getOccupation()}" /></td>
-                    <td><a href="persondelete?username=<c:out value="${person.getPersonName()}"/>">Delete</a></td>
-                    <td><a href="personupdate?username=<c:out value="${person.getPersonName()}"/>">Update</a></td>
+                    <td><a href="persondelete?personname=<c:out value="${person.getPersonName()}"/>">Delete</a></td>
+                    <td><a href="personupdate?personname=<c:out value="${person.getPersonName()}"/>">Update</a></td>
                 </tr>
             </c:forEach>
        </table>

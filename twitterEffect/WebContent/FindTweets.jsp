@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Find a User</title>
+<title>Find Tweets</title>
 </head>
 <body>
 	<form action="findtweets" method="post">
@@ -38,21 +38,16 @@
                 <th>Delete Tweet</th>
                 <th>Update Tweet</th>
             </tr>
-            <c:forEach items="${tweets}" var="tweets" >
+            <c:forEach items="${tweets}" var="tweet" >
                 <tr>
-                    <td><c:out value="${tweets.getLinkToTweet()}" /></td>
-                    <td><c:out value="${tweets.getTweetToDate()}" /></td>
-                    <td><c:out value="${tweets.getTweetToTime()}" /></td>
-                    <td><c:out value="${tweets.getContent()}" /></td>
-                    <td><c:out value="${tweets.getRetweets()}" /></td>
-                    <td><c:out value="${tweets.getPersonName()}" /></td>
-                    
-                    <td><c:out value="${blogUser.getLastName()}" /></td>
-                    <td><fmt:formatDate value="${blogUser.getDob()}" pattern="yyyy-MM-dd"/></td>
-                    <td><a href="userblogposts?username=<c:out value="${blogUser.getUserName()}"/>">BlogPosts</a></td>
-                    <td><a href="blogcomments?username=<c:out value="${blogUser.getUserName()}"/>">BlogComments</a></td>
-                    <td><a href="tweetsdelete?linkToTweet=<c:out value="${blogUser.getLinkToTweet}"/>">Delete</a></td>
-                    <td><a href="userupdate?username=<c:out value="${blogUser.getUserName()}"/>">Update</a></td>
+                    <td><c:out value="${tweet.getLinkToTweet()}" /></td>
+                    <td><c:out value="${tweet.getTweetToDate()}" /></td>
+                    <td><c:out value="${tweet.getTweetToTime()}" /></td>
+                    <td><c:out value="${tweet.getContent()}" /></td>
+                    <td><c:out value="${tweet.getRetweets()}" /></td>
+                    <td><c:out value="${tweet.getPersonName()}" /></td>
+                    <td><a href="tweetsdelete?linkToTweet=<c:out value="${tweet.getLinkToTweet}"/>">Delete</a></td>
+                    <td><a href="tweetsupdate?linkToTweet=<c:out value="${tweet.getLinkToTweet()}"/>">Update</a></td>
                 </tr>
             </c:forEach>
        </table>

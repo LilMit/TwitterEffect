@@ -15,7 +15,7 @@
 		<h1>Search for a Person by Occupation</h1>
 		<p>
 			<label for="indexticker">IndexTicker</label>
-			<input id="indexticker" name="indexticker" value="${fn:escapeXml(param.occupation)}">
+			<input id="indexticker" name="indexticker" value="${fn:escapeXml(param.indexticker)}">
 		</p>
 		<p>
 			<input type="submit">
@@ -34,7 +34,7 @@
                 <th>Delete StockIndex</th>
                 <th>Update StockIndex</th>
             </tr>
-            <c:forEach items="${stockindexes}" var="stockindex" >
+            <c:forEach items="${stockindex}" var="stockindex" >
                 <tr>
                     <td><c:out value="${stockindex.getIndexTicker()}" /></td>
                     <td><c:out value="${stockindex.getIndexName()}" /></td>

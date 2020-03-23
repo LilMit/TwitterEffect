@@ -91,7 +91,7 @@ public class StockCompaniesDao {
 
 	//Update Company Name
 	public StockCompanies updateCompanyName(StockCompanies stockCompanies, String newCompanyName) throws SQLException {
-		String updateCompanyName = "UPDATE StockCompanies SET CompanyName=? WHERE CompanyTicker=?;";
+		String updateCompanyName = "UPDATE StockCompanies SET Company=? WHERE CompanyTicker=?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
 		try {
@@ -119,7 +119,7 @@ public class StockCompaniesDao {
 	//Get company by ticker
 	public StockCompanies getCompanyByCompanyTicker(String companyTicker) throws SQLException {
 		String selectStockCompany =
-				"SELECT CompanyTicker,Company,MarketCap,MarketCapGroup,Sector,IndexTicker " +
+				"SELECT CompanyTicker, Company, MarketCap, MarketCapGroup, Sector, IndexTicker " +
 						"FROM StockCompanies " +
 						"WHERE CompanyTicker=?;";
 		Connection connection = null;
@@ -169,7 +169,7 @@ public class StockCompaniesDao {
 	public List<StockCompanies> getStockCompaniesByMarketCapGroup(StockCompanies.MarketCapGroupType marketCapGroupType) throws SQLException {
 		List<StockCompanies> stockCompanies = new ArrayList<StockCompanies>();
 		String selectStockCompany =
-				"SELECT CompanyTicker,Company,MarketCap,MarketCapGroup,Sector,IndexTicker " +
+				"SELECT CompanyTicker, Company, MarketCap, MarketCapGroup, Sector, IndexTicker " +
 						"FROM StockCompanies " +
 						"WHERE MarketCapGroup=?;";
 		Connection connection = null;
@@ -225,7 +225,7 @@ public class StockCompaniesDao {
 	public List<StockCompanies> getCompaniesBySector(String sector) throws SQLException {
 		List<StockCompanies> stockCompanies = new ArrayList<StockCompanies>();
 		String selectStockCompany =
-				"SELECT CompanyTicker,Company,MarketCap,MarketCapGroup,Sector,IndexTicker " +
+				"SELECT CompanyTicker, Company, MarketCap, MarketCapGroup, Sector, IndexTicker " +
 						"FROM StockCompanies " +
 						"WHERE Sector=?;";
 		Connection connection = null;
