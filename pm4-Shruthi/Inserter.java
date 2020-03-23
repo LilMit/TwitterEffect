@@ -8,7 +8,6 @@ import twitterEffect.dal.*;
 import java.util.Date;
 import java.util.List;
 
-import review.model.Users;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -37,7 +36,11 @@ public class Inserter {
 		IndexDailySummaryDao indexDailySummaryDao = IndexDailySummaryDao.getInstance();
 		
 		//Dates
+
+		//Here are 2 date formats --> dates and timestamps
 		SimpleDateFormat dateformat = new SimpleDateFormat("dd-M-yyyy");
+		SimpleDateFormat dateformat1 = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+
 		String strdate1 = "02-04-2013 11:35:42";
 		String strdate2 = "10-20-2015 11:35:42";
 		String strdate3 = "07-28-2016 11:35:42";
@@ -45,6 +48,7 @@ public class Inserter {
 		String strdate5 = "01-04-2018 11:35:42";
 		String strdate6 = "07-28-2019 11:35:42";
 
+		//You can parse it as dates and parse it as timestamps I have parsed as dates
 		Date date1 = dateformat.parse(strdate1);
 		Date date2 = dateformat.parse(strdate2);
 		Date date3 = dateformat.parse(strdate3);
@@ -68,19 +72,28 @@ public class Inserter {
 		indexDailySummary1 = indexDailySummaryDao.create(indexDailySummary1);
 		stockCompany1 = stockCompaniesDao.create(stockCompany1);
 		stockCompanyDailySummary1 = stockCompanyDailySummaryDao.create(stockCompanyDailySummary1);
-
+	
+	
+		//Delete Statements
+		//stockIndexDao.delete(stockIndex1);
+		//indexDailySummaryDao.delete(indexDailySummary1);
+		//stockCompaniesDao.delete(stockCompany1);
+		//stockCompanyDailySummaryDao.delete(stockCompanyDailySummary1);
+		
 		//Update Statements
 		stockIndexDao.updateIndexName(stockIndex1, "newStockIndex");
+		indexDailySummaryDao.updatePrices(indexDailySummary1, 3.2f, 3.2f, 3.2f, 3.2f, 3.2f);
 		
 		//Read Statements
 		StockIndex s1 = stockIndexDao.getStockIndexByIndexTicker(stockIndex1.getIndexTicker());
 		System.out.format("Reading stock index: IndTick:%s IndName:%s \n", s1.getIndexTicker(), s1.getIndexName());
-	
-	
-		//Delete Statements
-		stockIndexDao.delete(stockIndex1);
-		indexDailySummaryDao.delete(indexDailySummary1);
-		stockCompaniesDao.delete(stockCompany1);
-		stockCompanyDailySummaryDao.delete(stockCompanyDailySummary1);
+
+		List<IndexDailySummary> idsList1 = indexDailySummaryDao.getIndexDailySummaryForADate(date4);
+		for(IndexDailySummary ids : idsList1) {
+			System.out.format("Looping index daily summaries: sd:%s it:%s open:%s high:%s low:%s close:%s adjclose:%s "
+					+ "volume:%s summaryId:%s \n", ids.getSummaryDate(), ids.getOpen(), ids.getHigh(), ids.getLow(),
+					ids.getClose(), ids.getAdjClose(), ids.getVolume(), ids.getSummaryId());
+		}
+
 	}
 }
