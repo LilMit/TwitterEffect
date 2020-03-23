@@ -94,8 +94,26 @@ public class Inserter {
 				+ "volume:%s summaryId:%d \n", 
 				ids1.getSummaryDate(), ids1.getStockIndex().getIndexTicker(), 
 				ids1.getOpen(), ids1.getHigh(), ids1.getLow(),
-				ids1.getClose(), ids1.getAdjClose(), ids1.getVolume(), ids1.getSummaryId());		
+				ids1.getClose(), ids1.getAdjClose(), ids1.getVolume(), ids1.getSummaryId());
+				
+		StockCompanies sc1 = stockCompaniesDao.getCompanyByCompanyTicker("AA");
+		System.out.format("Reading stock companies: CompanyTicker:%s Company:%s MarketCap:%s MarketCapGroup:%s Sector:%s IndexTicker:%s\n", 
+				sc1.getCompanyTicker(), sc1.getCompany(), sc1.getMarketCap(), sc1.getMarketCapGroup(), 
+				sc1.getSector(), sc1.getStockIndex().getIndexTicker());
 
+		List<StockCompanies> scList1 = stockCompaniesDao.getStockCompaniesByMarketCapGroup(StockCompanies.MarketCapGroupType.Large);
+		for(StockCompanies sc : scList1) {
+			System.out.format("Looping stock companies by marketcapgroup: CompanyTicker:%s Company:%s MarketCap:%s MarketCapGroup:%s Sector:%s IndexTicker:%s\n", 
+					sc.getCompanyTicker(), sc.getCompany(), sc.getMarketCap(), sc.getMarketCapGroup(), 
+					sc.getSector(), sc.getStockIndex().getIndexTicker());
+			}
+		
+		List<StockCompanies> scList2 = stockCompaniesDao.getCompaniesBySector("healthcare");
+		for(StockCompanies sc : scList2) {
+			System.out.format("Looping stock companies by sector: CompanyTicker:%s Company:%s MarketCap:%s MarketCapGroup:%s Sector:%s IndexTicker:%s\n", 
+					sc.getCompanyTicker(), sc.getCompany(), sc.getMarketCap(), sc.getMarketCapGroup(), 
+					sc.getSector(), sc.getStockIndex().getIndexTicker());
+			}
 
 	}
 }

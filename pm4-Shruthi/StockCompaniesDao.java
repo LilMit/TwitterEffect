@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import review.model.Restaurants;
+
 
 public class StockCompaniesDao {
 	protected ConnectionManager connectionManager;
@@ -30,15 +32,15 @@ public class StockCompaniesDao {
 	//should summary id be autocreated?
 	public StockCompanies create(StockCompanies stockCompanies) throws SQLException {
 		String insertStockCompanies =
-			"INSERT INTO StockCompanies(CompanyTicker, Company, MarketCap, MarketCapGroup, Sector, IndexTicker) " +
-			"VALUES(?,?,?,?,?,?);";
+				"INSERT INTO StockCompanies(CompanyTicker, Company, MarketCap, MarketCapGroup, Sector, IndexTicker) " +
+						"VALUES(?,?,?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		//ResultSet resultKey = null;
 		try {
 			connection = connectionManager.getConnection();
 			//insertStmt = connection.prepareStatement(insertBlogComment,
-				//Statement.RETURN_GENERATED_KEYS);
+			//Statement.RETURN_GENERATED_KEYS);
 			insertStmt = connection.prepareStatement(insertStockCompanies);
 			insertStmt.setString(1, stockCompanies.getCompanyTicker());
 			insertStmt.setString(2, stockCompanies.getCompany());
@@ -47,8 +49,8 @@ public class StockCompaniesDao {
 			insertStmt.setString(5, stockCompanies.getSector());
 			insertStmt.setString(6, stockCompanies.getStockIndex().getIndexTicker());
 			insertStmt.executeUpdate();
-			
-			
+
+
 			return stockCompanies;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -62,7 +64,7 @@ public class StockCompaniesDao {
 			}
 		}
 	}
-	
+
 	/**
 	 * Delete the stockCompanies instance.
 	 */
@@ -89,5 +91,192 @@ public class StockCompaniesDao {
 				deleteStmt.close();
 			}
 		}
+	}
+
+	//Update Company Name
+	public StockCompanies updateCompanyName(StockCompanies stockCompanies, String newCompanyName) throws SQLException {
+		String updateCompanyName = "UPDATE StockCompanies SET CompanyName=? WHERE CompanyTicker=?;";
+		Connection connection = null;
+		PreparedStatement updateStmt = null;
+		try {
+			connection = connectionManager.getConnection();
+			updateStmt = connection.prepareStatement(updateCompanyName);
+			updateStmt.setString(1, newCompanyName);;
+			updateStmt.setString(2, stockCompanies.getCompanyTicker());
+			updateStmt.executeUpdate();
+
+			stockCompanies.setCompany(newCompanyName);
+			return stockCompanies;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(updateStmt != null) {
+				updateStmt.close();
+			}
+		}
+	}
+
+	//Get company by ticker
+	public StockCompanies getCompanyByCompanyTicker(String companyTicker) throws SQLException {
+		String selectStockCompany =
+				"SELECT CompanyTicker,Company,MarketCap,MarketCapGroup,Sector,IndexTicker " +
+						"FROM StockCompanies " +
+						"WHERE CompanyTicker=?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectStockCompany);
+			selectStmt.setString(1, companyTicker);
+			results = selectStmt.executeQuery();
+
+			StockIndexDao stockIndexDao = StockIndexDao.getInstance();
+			if(results.next()) {					
+				String resultCompanyTicker = results.getString("CompanyTicker");
+				String company = results.getString("Company");
+				long marketCap = results.getLong("MarketCap");
+				StockCompanies.MarketCapGroupType marketCapGroupType = StockCompanies.MarketCapGroupType.valueOf(results.getString("MarketCapGroup"));
+				String sector = results.getString("Sector");
+				String indexTicker = results.getString("IndexTicker");
+
+
+				StockIndex stockIndex = stockIndexDao.getStockIndexByIndexTicker(indexTicker);
+
+				StockCompanies stockCompanies = new StockCompanies(resultCompanyTicker, company, marketCap, 
+						marketCapGroupType, sector, stockIndex);
+
+				return stockCompanies;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
+
+	//Get list of companies given marketcapgroup type
+	public List<StockCompanies> getStockCompaniesByMarketCapGroup(StockCompanies.MarketCapGroupType marketCapGroupType) throws SQLException {
+		List<StockCompanies> stockCompanies = new ArrayList<StockCompanies>();
+		String selectStockCompany =
+				"SELECT CompanyTicker,Company,MarketCap,MarketCapGroup,Sector,IndexTicker " +
+						"FROM StockCompanies " +
+						"WHERE MarketCapGroup=?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectStockCompany);
+
+			
+			selectStmt.setString(1, marketCapGroupType.name());
+
+			results = selectStmt.executeQuery();
+
+			StockIndexDao stockIndexDao = StockIndexDao.getInstance();
+			while(results.next()) {
+				String companyTicker = results.getString("CompanyTicker");
+				String company = results.getString("Company");
+				long marketCap = results.getLong("MarketCap");
+				StockCompanies.MarketCapGroupType resultMarketCapGroupType = StockCompanies.MarketCapGroupType.valueOf(results.getString("MarketCapGroup"));
+				String sector = results.getString("Sector");
+				String indexTicker = results.getString("IndexTicker");
+
+
+				StockIndex stockIndex = stockIndexDao.getStockIndexByIndexTicker(indexTicker);
+
+				StockCompanies stockCompany = new StockCompanies(companyTicker, company, marketCap, 
+						resultMarketCapGroupType, sector, stockIndex);
+
+				stockCompanies.add(stockCompany);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return stockCompanies;
+
+	}
+
+
+	//get list of all companies given sector
+	public List<StockCompanies> getCompaniesBySector(String sector) throws SQLException {
+		List<StockCompanies> stockCompanies = new ArrayList<StockCompanies>();
+		String selectStockCompany =
+				"SELECT CompanyTicker,Company,MarketCap,MarketCapGroup,Sector,IndexTicker " +
+						"FROM StockCompanies " +
+						"WHERE Sector=?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectStockCompany);
+
+			
+			selectStmt.setString(1, sector);
+
+			results = selectStmt.executeQuery();
+
+			StockIndexDao stockIndexDao = StockIndexDao.getInstance();
+			while(results.next()) {
+				String companyTicker = results.getString("CompanyTicker");
+				String company = results.getString("Company");
+				long marketCap = results.getLong("MarketCap");
+				StockCompanies.MarketCapGroupType marketCapGroupType = StockCompanies.MarketCapGroupType.valueOf(results.getString("MarketCapGroup"));
+				String resultSector = results.getString("Sector");
+				String indexTicker = results.getString("IndexTicker");
+
+
+				StockIndex stockIndex = stockIndexDao.getStockIndexByIndexTicker(indexTicker);
+
+				StockCompanies stockCompany = new StockCompanies(companyTicker, company, marketCap, 
+						marketCapGroupType, resultSector, stockIndex);
+
+				stockCompanies.add(stockCompany);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return stockCompanies;
+
 	}
 }

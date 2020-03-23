@@ -15,7 +15,7 @@ public class StockCompanies {
 	protected StockIndex stockIndex;
 	
 	public enum MarketCapGroupType {
-		MEGA, LARGE, MEDIUM, SMALL, MICRO
+		Mega, Large, Medium, Small, Micro
 	}
 
 	public StockCompanies(String companyTicker, String company, long marketCap, MarketCapGroupType marketCapGroup,
