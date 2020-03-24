@@ -8,11 +8,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Find a Person</title>
+<title>Find a StockIndex</title>
 </head>
 <body>
 	<form action="findstockindex" method="post">
-		<h1>Search for a Person by Occupation</h1>
+		<h1>Search for a StockIndex by Ticker</h1>
 		<p>
 			<label for="indexticker">IndexTicker</label>
 			<input id="indexticker" name="indexticker" value="${fn:escapeXml(param.indexticker)}">
@@ -34,14 +34,12 @@
                 <th>Delete StockIndex</th>
                 <th>Update StockIndex</th>
             </tr>
-            <c:forEach items="${stockindex}" var="stockindex" >
-                <tr>
-                    <td><c:out value="${stockindex.getIndexTicker()}" /></td>
-                    <td><c:out value="${stockindex.getIndexName()}" /></td>
-                    <td><a href="stockindexdelete?indexticker=<c:out value="${stockindex.getIndexTicker()}"/>">Delete</a></td>
-                    <td><a href="stockindexupdate?indexticker=<c:out value="${stockindex.getIndexTicker()}"/>">Update</a></td>
-                </tr>
-            </c:forEach>
+			<tr>
+				<td><c:out value="${stockIndex.getIndexTicker()}" /></td>
+				<td><c:out value="${stockIndex.getIndexName()}" /></td>
+                <td><a href="stockindexdelete?indexticker=<c:out value="${stockIndex.getIndexTicker()}"/>">Delete</a></td>
+                <td><a href="stockindexupdate?indexticker=<c:out value="${stockIndex.getIndexTicker()}"/>">Update</a></td>
+			</tr>
        </table>
 </body>
 </html>

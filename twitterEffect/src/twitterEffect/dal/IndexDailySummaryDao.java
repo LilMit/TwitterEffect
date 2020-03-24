@@ -9,11 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-import review.dal.CompaniesDao;
-import review.model.Companies;
-import review.model.Restaurants;
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 

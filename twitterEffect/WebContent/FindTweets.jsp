@@ -31,23 +31,25 @@
             <tr>
                 <th>LinkToTweet</th>
                 <th>TweetDate</th>
-                <th>TweetTime</th>
+				<th>TweetTime</th>
                 <th>Content</th>
                 <th>Retweets</th>
                 <th>PersonName</th>
                 <th>Delete Tweet</th>
                 <th>Update Tweet</th>
             </tr>
-            <c:forEach items="${tweets}" var="tweet" >
+            <c:forEach items="${tweets}" var="tweets" >
                 <tr>
-                    <td><c:out value="${tweet.getLinkToTweet()}" /></td>
-                    <td><c:out value="${tweet.getTweetToDate()}" /></td>
-                    <td><c:out value="${tweet.getTweetToTime()}" /></td>
-                    <td><c:out value="${tweet.getContent()}" /></td>
-                    <td><c:out value="${tweet.getRetweets()}" /></td>
-                    <td><c:out value="${tweet.getPersonName()}" /></td>
-                    <td><a href="tweetsdelete?linkToTweet=<c:out value="${tweet.getLinkToTweet}"/>">Delete</a></td>
-                    <td><a href="tweetsupdate?linkToTweet=<c:out value="${tweet.getLinkToTweet()}"/>">Update</a></td>
+                    <td><c:out value="${tweets.getLinkToTweet()}" /></td>
+                    <%-- <td><fmt:formatDate value="${tweets.getTweetDate()}" pattern="yyyy-MM-dd"/></td> --%>
+<!--                     EP: Might be formatting issues with dates/times? above is how they did it in blogUsers
+ -->                <td><c:out value="${tweets.getTweetDate()}" /></td>
+                    <td><c:out value="${tweets.getTweetTime()}" /></td>
+                    <td><c:out value="${tweets.getContent()}" /></td>
+                    <td><c:out value="${tweets.getRetweets()}" /></td>
+                    <td><c:out value="${tweets.getPersonName().getPersonName()}" /></td>
+                    <td><a href="tweetsdelete?linkToTweet=<c:out value="${tweets.getLinkToTweet()}"/>">Delete</a></td>
+                    <td><a href="tweetsupdate?linkToTweet=<c:out value="${tweets.getLinkToTweet()}"/>">Update</a></td>
                 </tr>
             </c:forEach>
        </table>
