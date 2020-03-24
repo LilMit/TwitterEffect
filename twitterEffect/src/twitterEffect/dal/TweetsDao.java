@@ -5,11 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
+import java.sql.Time;
 import java.util.ArrayList;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
+import twitterEffect.model.Person;
 import twitterEffect.model.Tweets;
 
 public class TweetsDao {
@@ -42,11 +43,11 @@ public class TweetsDao {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertTweet);
 			insertStmt.setString(1, tweet.getLinkToTweet());
-			insertStmt.setDate(2, tweet.getTweetDate());
-			insertStmt.setTimestamp(3, tweet.getTweetTime());
+			insertStmt.setDate(2, new java.sql.Date(tweet.getTweetDate().getTime()));
+			insertStmt.setTime(3, new Time(tweet.getTweetTime().getTime()));
 			insertStmt.setString(4, tweet.getContent());
 			insertStmt.setInt(5, tweet.getRetweets());
-			insertStmt.setString(6, tweet.getPersonName());
+			insertStmt.setString(6, tweet.getPersonName().getPersonName());
 			insertStmt.executeUpdate();
 			return tweet;
 		} catch (SQLException e) {
@@ -139,14 +140,16 @@ public class TweetsDao {
 			selectStmt = connection.prepareStatement(selectTweet);
 			selectStmt.setString(1, linkToTweet);
 			results = selectStmt.executeQuery();
+			PersonDao personsDao = PersonDao.getInstance();
 			if(results.next()) {
 				String resultLinkToTweet = results.getString("LinkToTweet");
 				Date tweetDate = results.getDate("TweetDate");
-				Timestamp tweetTime = results.getTimestamp("TweetTime");
+				Time tweetTime = results.getTime("TweetTime");
 				String content = results.getString("Content");
-				int retweets = results.getInt("Retweets");			
-				String userName = results.getString("UserName");
-				Tweets tweet = new Tweets(resultLinkToTweet,tweetDate,tweetTime,content,retweets,userName);
+				int retweets = results.getInt("Retweets");		
+				String personName = results.getString("PersonName");
+				Person person = personsDao.getPersonByPersonName(personName);
+				Tweets tweet = new Tweets(resultLinkToTweet,tweetDate,tweetTime,content,retweets,person);
 				return tweet;
 			}
 		} catch (SQLException e) {
@@ -184,14 +187,16 @@ public class TweetsDao {
 			selectStmt = connection.prepareStatement(selectTweets);
 			selectStmt.setString(1, personName);
 			results = selectStmt.executeQuery();
+			PersonDao personsDao = PersonDao.getInstance();
 			while(results.next()) {
 				String linkToTweet = results.getString("LinkToTweet");
 				Date tweetDate = results.getDate("TweetDate");
-				Timestamp tweetTime = results.getTimestamp("TweetTime");
+				Time tweetTime = results.getTime("TweetTime");
 				String content = results.getString("Content");
 				int retweets = results.getInt("Retweets");			
-				String resultUserName = results.getString("UserName");
-				Tweets tweet = new Tweets(linkToTweet,tweetDate,tweetTime,content,retweets,resultUserName);
+				String resultPersonName = results.getString("PersonName");
+				Person person = personsDao.getPersonByPersonName(resultPersonName);
+				Tweets tweet = new Tweets(linkToTweet,tweetDate,tweetTime,content,retweets,person);
 				tweets.add(tweet);
 			}
 		} catch (SQLException e) {

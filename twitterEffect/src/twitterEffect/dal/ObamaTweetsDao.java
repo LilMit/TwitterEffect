@@ -5,11 +5,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
 import twitterEffect.model.ObamaTweets;
+import twitterEffect.model.Person;
 import twitterEffect.model.Tweets;
 
 public class ObamaTweetsDao  extends TweetsDao {
@@ -113,17 +114,19 @@ public class ObamaTweetsDao  extends TweetsDao {
 			selectStmt = connection.prepareStatement(selectObamaTweet);
 			selectStmt.setString(1, linkToTweet);
 			results = selectStmt.executeQuery();
+			PersonDao personsDao = PersonDao.getInstance();
 			if(results.next()) {
 				String resultLinkToTweet = results.getString("LinkToTweet");
 				Date tweetDate = results.getDate("TweetDate");
-				Timestamp tweetTime = results.getTimestamp("TweetTime");
+				Time tweetTime = results.getTime("TweetTime");
 				String content = results.getString("Content");
 				int retweets = results.getInt("Retweets");			
 				String personName = results.getString("PersonName");
+				Person person = personsDao.getPersonByPersonName(personName);
 				String userName = results.getString("UserName");
 				int likes = results.getInt("Likes");
 				String tweetImageURL = results.getString("TweetImageURL");
-				ObamaTweets obamaTweet = new ObamaTweets(resultLinkToTweet,tweetDate,tweetTime,content,retweets,personName,
+				ObamaTweets obamaTweet = new ObamaTweets(resultLinkToTweet,tweetDate,tweetTime,content,retweets,person,
 														userName,likes,tweetImageURL);
 				return obamaTweet;
 			}
@@ -160,17 +163,19 @@ public class ObamaTweetsDao  extends TweetsDao {
 			selectStmt = connection.prepareStatement(selectObamaTweets);
 			selectStmt.setDate(1, tweetDate);
 			results = selectStmt.executeQuery();
+			PersonDao personsDao = PersonDao.getInstance();
 			while(results.next()) {
 				String linkToTweet = results.getString("LinkToTweet");
 				Date resultTweetDate = results.getDate("TweetDate");
-				Timestamp tweetTime = results.getTimestamp("TweetTime");
+				Time tweetTime = results.getTime("TweetTime");
 				String content = results.getString("Content");
 				int retweets = results.getInt("Retweets");			
 				String personName = results.getString("PersonName");
+				Person person = personsDao.getPersonByPersonName(personName);
 				String userName = results.getString("UserName");
 				int likes = results.getInt("Likes");
 				String tweetImageURL = results.getString("TweetImageURL");
-				ObamaTweets obamaTweet = new ObamaTweets(linkToTweet,resultTweetDate,tweetTime,content,retweets,personName,
+				ObamaTweets obamaTweet = new ObamaTweets(linkToTweet,resultTweetDate,tweetTime,content,retweets,person,
 														 userName,likes,tweetImageURL);
 				obamaTweets.add(obamaTweet);
 			}

@@ -1,14 +1,14 @@
 package twitterEffect.model;
 
-import java.sql.Timestamp;
-import java.sql.Date;
+import java.sql.Time;
+import java.util.Date;
 
 public class TrumpTweets extends Tweets{
 	protected long TweetId;
 	protected int Favorites;
 	
-	public TrumpTweets(String linkToTweet, Date tweetDate, Timestamp tweetTime, String content, int retweets,
-			String personName, long tweetId, int favorites) {
+	public TrumpTweets(String linkToTweet, Date tweetDate, Time tweetTime, String content, int retweets,
+			Person personName, long tweetId, int favorites) {
 		super(linkToTweet, tweetDate, tweetTime, content, retweets, personName);
 		this.TweetId = tweetId;
 		this.Favorites = favorites;

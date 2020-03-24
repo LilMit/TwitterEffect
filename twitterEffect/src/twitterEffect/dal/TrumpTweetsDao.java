@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
 
-
+import twitterEffect.model.Person;
 import twitterEffect.model.TrumpTweets;
 import twitterEffect.model.Tweets;
 
@@ -111,16 +111,18 @@ public class TrumpTweetsDao extends TweetsDao {
 			selectStmt = connection.prepareStatement(selectTrumpTweet);
 			selectStmt.setString(1, linkToTweet);
 			results = selectStmt.executeQuery();
+			PersonDao personsDao = PersonDao.getInstance();
 			if(results.next()) {
 				String resultLinkToTweet = results.getString("LinkToTweet");
 				Date tweetDate = results.getDate("TweetDate");
-				Timestamp tweetTime = results.getTimestamp("TweetTime");
+				Time tweetTime = results.getTime("TweetTime");
 				String content = results.getString("Content");
-				int retweets = results.getInt("Retweets");			
-				String userName = results.getString("UserName");
+				int retweets = results.getInt("Retweets");
+				String personName = results.getString("PersonName");
+				Person person = personsDao.getPersonByPersonName(personName);
 				long tweetId = results.getLong("TweetId");
 				int favorites = results.getInt("Favorites");
-				TrumpTweets trumpTweet = new TrumpTweets(resultLinkToTweet,tweetDate,tweetTime,content,retweets,userName,
+				TrumpTweets trumpTweet = new TrumpTweets(resultLinkToTweet,tweetDate,tweetTime,content,retweets,person,
 														 tweetId,favorites);
 				return trumpTweet;
 			}
@@ -157,16 +159,18 @@ public class TrumpTweetsDao extends TweetsDao {
 			selectStmt = connection.prepareStatement(selectTrumpTweets);
 			selectStmt.setDate(1, tweetDate);
 			results = selectStmt.executeQuery();
+			PersonDao personsDao = PersonDao.getInstance();
 			while(results.next()) {
 				String linkToTweet = results.getString("LinkToTweet");
 				Date resultTweetDate = results.getDate("TweetDate");
-				Timestamp tweetTime = results.getTimestamp("TweetTime");
+				Time tweetTime = results.getTime("TweetTime");
 				String content = results.getString("Content");
 				int retweets = results.getInt("Retweets");			
-				String userName = results.getString("UserName");
+				String personName = results.getString("PersonName");
+				Person person = personsDao.getPersonByPersonName(personName);
 				long tweetId = results.getLong("TweetId");
 				int favorites = results.getInt("Favorites");
-				TrumpTweets trumpTweet = new TrumpTweets(linkToTweet,resultTweetDate,tweetTime,content,retweets,userName,
+				TrumpTweets trumpTweet = new TrumpTweets(linkToTweet,resultTweetDate,tweetTime,content,retweets,person,
 						 tweetId,favorites);
 				trumpTweets.add(trumpTweet);
 			}

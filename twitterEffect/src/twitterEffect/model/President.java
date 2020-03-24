@@ -23,6 +23,10 @@ public class President extends Person{
 		super(personName, "President");
 		this.partyAffiliation = partyAffiliation;
 	}
+	
+	public President(String personName) {
+		super(personName);
+	}
 
 	/**
 	 * @return the partyAffiliation
