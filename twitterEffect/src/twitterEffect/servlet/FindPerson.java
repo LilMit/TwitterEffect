@@ -1,3 +1,7 @@
+/**
+ * @author elaineparr
+ */
+
 package twitterEffect.servlet;
 
 import twitterEffect.dal.*;

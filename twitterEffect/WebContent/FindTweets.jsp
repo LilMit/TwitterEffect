@@ -8,14 +8,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Find Tweets</title>
+<title>Find a User</title>
 </head>
 <body>
 	<form action="findtweets" method="post">
 		<h1>Search for a Tweets by PersonName</h1>
 		<p>
-			<label for="personName">PersonName</label>
-			<input id="personName" name="personName" value="${fn:escapeXml(param.pesonName)}">
+			<label for="personname">PersonName</label>
+			<input id="personname" name="personname" value="${fn:escapeXml(param.personname)}">
 		</p>
 		<p>
 			<input type="submit">
@@ -24,32 +24,30 @@
 		</p>
 	</form>
 	<br/>
-	<div id="tweetCreate"><a href="tweetcreate">Create Tweets</a></div>
+	<div id="tweetCreate"><a href="tweetcreate">Create Tweet</a></div>
 	<br/>
 	<h1>Matching Tweets</h1>
         <table border="1">
             <tr>
                 <th>LinkToTweet</th>
                 <th>TweetDate</th>
-				<th>TweetTime</th>
+                <th>TweetTime</th>
                 <th>Content</th>
                 <th>Retweets</th>
                 <th>PersonName</th>
                 <th>Delete Tweet</th>
                 <th>Update Tweet</th>
             </tr>
-            <c:forEach items="${tweets}" var="tweets" >
+            <c:forEach items="${tweets}" var="tweet" >
                 <tr>
-                    <td><c:out value="${tweets.getLinkToTweet()}" /></td>
-                    <%-- <td><fmt:formatDate value="${tweets.getTweetDate()}" pattern="yyyy-MM-dd"/></td> --%>
-<!--                     EP: Might be formatting issues with dates/times? above is how they did it in blogUsers
- -->                <td><c:out value="${tweets.getTweetDate()}" /></td>
-                    <td><c:out value="${tweets.getTweetTime()}" /></td>
-                    <td><c:out value="${tweets.getContent()}" /></td>
-                    <td><c:out value="${tweets.getRetweets()}" /></td>
-                    <td><c:out value="${tweets.getPersonName().getPersonName()}" /></td>
-                    <td><a href="tweetsdelete?linkToTweet=<c:out value="${tweets.getLinkToTweet()}"/>">Delete</a></td>
-                    <td><a href="tweetsupdate?linkToTweet=<c:out value="${tweets.getLinkToTweet()}"/>">Update</a></td>
+                    <td><c:out value="${tweet.getLinkToTweet()}" /></td>
+                    <td><c:out value="${tweet.getTweetDate()}" /></td>
+                    <td><c:out value="${tweet.getTweetTime()}" /></td>
+                    <td><c:out value="${tweet.getContent()}" /></td>
+                    <td><c:out value="${tweet.getRetweets()}" /></td>
+                    <td><c:out value="${tweet.getPersonName()}" /></td>
+                     <td><a href="tweetsdelete?LinkToTweet=<c:out value="${tweet.getLinkToTweet()}"/>">Delete</a></td>
+                    <td><a href="tweetcreate?LinkToTweet=<c:out value="${tweet.getLinkToTweet()}"/>">Update</a></td>
                 </tr>
             </c:forEach>
        </table>

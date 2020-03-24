@@ -14,18 +14,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * @author elaineparr
- */
 
-@WebServlet("/persondelete")
-public class PersonDelete extends HttpServlet {
+@WebServlet("/stockcompaniesdelete")
+public class StockCompaniesDelete extends HttpServlet {
 	
-	protected PersonDao personsDao;
+	protected StockCompaniesDao stockCompaniesDao;
 	
 	@Override
 	public void init() throws ServletException {
-		personsDao = PersonDao.getInstance();
+		stockCompaniesDao = StockCompaniesDao.getInstance();
 	}
 	
 	@Override
@@ -35,8 +32,8 @@ public class PersonDelete extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
         // Provide a title and render the JSP.
-        messages.put("title", "Delete Person");        
-        req.getRequestDispatcher("/PersonDelete.jsp").forward(req, resp);
+        messages.put("title", "Delete StockCompanies");        
+        req.getRequestDispatcher("/StockCompaniesDelete.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -47,21 +44,21 @@ public class PersonDelete extends HttpServlet {
         req.setAttribute("messages", messages);
 
         // Retrieve and validate name.
-        String personName = req.getParameter("personname");
-        if (personName == null || personName.trim().isEmpty()) {
-            messages.put("title", "Invalid PersonName");
+        String companyTicker = req.getParameter("companyticker");
+        if (companyTicker == null || companyTicker.trim().isEmpty()) {
+            messages.put("title", "Invalid CompanyTicker");
             messages.put("disableSubmit", "true");
         } else {
-        	// Delete the Person.
-	        Person person = new Person(personName);
+        	// Delete the StockCompanies.
+	        StockCompanies stockCompanies = new StockCompanies(companyTicker);
 	        try {
-	        	person = personsDao.delete(person);
+	        	stockCompanies = stockCompaniesDao.delete(stockCompanies);
 	        	// Update the message.
-		        if (person == null) {
-		            messages.put("title", "Successfully deleted " + personName);
+		        if (stockCompanies == null) {
+		            messages.put("title", "Successfully deleted " + companyTicker);
 		            messages.put("disableSubmit", "true");
 		        } else {
-		        	messages.put("title", "Failed to delete " + personName);
+		        	messages.put("title", "Failed to delete " + companyTicker);
 		        	messages.put("disableSubmit", "false");
 		        }
 	        } catch (SQLException e) {
@@ -70,6 +67,6 @@ public class PersonDelete extends HttpServlet {
 	        }
         }
         
-        req.getRequestDispatcher("/PersonDelete.jsp").forward(req, resp);
+        req.getRequestDispatcher("/StockCompaniesDelete.jsp").forward(req, resp);
     }
 }
