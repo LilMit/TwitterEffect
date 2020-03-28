@@ -1,0 +1,5 @@
+Potential Dataset Additions
+
+trump approval ratings - https://github.com/fivethirtyeight/data/tree/master/trump-approval-ratings
+
+trump impeachement polls - https://github.com/fivethirtyeight/data/tree/master/impeachment-polls
