@@ -3,3 +3,5 @@ Potential Dataset Additions
 trump approval ratings - https://github.com/fivethirtyeight/data/tree/master/trump-approval-ratings
 
 trump impeachement polls - https://github.com/fivethirtyeight/data/tree/master/impeachment-polls
+
+https://www.kaggle.com/devorvant/economic-calendar this has lots of economic- related events by date plus some other stock measures
