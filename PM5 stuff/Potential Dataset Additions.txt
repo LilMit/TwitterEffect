@@ -4,5 +4,4 @@ trump approval ratings - https://github.com/fivethirtyeight/data/tree/master/tru
 
 trump impeachement polls - https://github.com/fivethirtyeight/data/tree/master/impeachment-polls
 
-https://www.kaggle.com/devorvant/economic-calendar this has lots of economic- related events by date plus some other stock measures
-actually I don't really understand what they mean by "events" here
+currency exchange rates (in terms of euro but we can alter this)- https://www.kaggle.com/lsind18/euro-exchange-daily-rates-19992020/version/8# 
