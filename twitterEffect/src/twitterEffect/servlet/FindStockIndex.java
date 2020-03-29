@@ -5,9 +5,7 @@ import twitterEffect.model.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.annotation.*;
@@ -15,6 +13,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+/**
+ * @author elaineparr
+ */
 
 
 /**
@@ -49,25 +51,25 @@ public class FindStockIndex extends HttpServlet {
 		// Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
-
         
         // Retrieve and validate name.
         // indexticker is retrieved from the URL query string.
-        String indexticker = req.getParameter("indexticker");
-        if (indexticker == null || indexticker.trim().isEmpty()) {
-            messages.put("success", "Please enter a valid name.");
+        String indexTicker = req.getParameter("indexticker");
+        StockIndex stockIndex = null;
+        if (indexTicker == null || indexTicker.trim().isEmpty()) {
+            messages.put("success", "Please enter a valid ticker.");
         } else {
         	// Retrieve StockIndex, and store as a message.
         	try {
-            	stockIndex = stockIndexDao.getStockIndexByIndexTicker(indexticker);
+            	stockIndex = stockIndexDao.getStockIndexByIndexTicker(indexTicker);
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
             }
-        	messages.put("success", "Displaying results for " + indexticker);
+        	messages.put("success", "Displaying results for " + indexTicker);
         	// Save the previous search term, so it can be used as the default
         	// in the input box when rendering FindStockIndex.jsp.
-        	messages.put("previousIndexTicker", indexticker);
+        	messages.put("previousIndexTicker", indexTicker);
         }
         req.setAttribute("stockIndex", stockIndex);
         

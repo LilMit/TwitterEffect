@@ -1,3 +1,7 @@
+/**
+ * @author elaineparr
+ */
+
 package twitterEffect.dal;
 
 import java.sql.Connection;

@@ -18,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * FindUsers is the primary entry point into the application.
+ * FindStockCompanies is the primary entry point into the application.
  * 
  * Note the logic for doGet() and doPost() are almost identical. However, there is a difference:
- * doGet() handles the http GET request. This method is called when you put in the /findusers
+ * doGet() handles the http GET request. This method is called when you put in the /findstockcompanies
  * URL in the browser.
  * doPost() handles the http POST request. This method is called after you click the submit button.
  * 
@@ -33,14 +33,14 @@ import javax.servlet.http.HttpServletResponse;
  * 3. Run the Tomcat server at localhost.
  * 4. Point your browser to http://localhost:8080/BlogApplication/findusers.
  */
-@WebServlet("/findtweets")
-public class FindTweets extends HttpServlet {
+@WebServlet("/findstockcompanies")
+public class FindStockCompanies extends HttpServlet {
 	
-	protected TweetsDao tweetsDao;
+	protected StockCompaniesDao stockCompaniesDao;
 	
 	@Override
 	public void init() throws ServletException {
-		tweetsDao = TweetsDao.getInstance();
+		stockCompaniesDao = StockCompaniesDao.getInstance();
 	}
 	
 	@Override
@@ -50,29 +50,29 @@ public class FindTweets extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-        List<Tweets> tweets = new ArrayList<Tweets>();
+        List<StockCompanies> stockCompanies = new ArrayList<StockCompanies>();
         
         // Retrieve and validate name.
-        // personname is retrieved from the URL query string.
-        String personName = req.getParameter("personname");
-        if (personName == null || personName.trim().isEmpty()) {
+        // sector is retrieved from the URL query string.
+        String sectorName = req.getParameter("sector");
+        if (sectorName == null || sectorName.trim().isEmpty()) {
             messages.put("success", "Please enter a valid name.");
         } else {
         	// Retrieve BlogUsers, and store as a message.
         	try {
-            	tweets = tweetsDao.getTweetsByPersonName(personName);
+            	stockCompanies = stockCompaniesDao.getCompaniesBySector(sectorName);
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
             }
-        	messages.put("success", "Displaying results for " + personName);
+        	messages.put("success", "Displaying results for " + sectorName);
         	// Save the previous search term, so it can be used as the default
-        	// in the input box when rendering FindUsers.jsp.
-        	messages.put("previousPersonName", personName);
+        	// in the input box when rendering FindStockCompanies.jsp.
+        	messages.put("previousSectorName", sectorName);
         }
-        req.setAttribute("tweets", tweets);
+        req.setAttribute("stockCompanies", stockCompanies);
         
-        req.getRequestDispatcher("/FindTweets.jsp").forward(req, resp);
+        req.getRequestDispatcher("/FindStockCompanies.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -82,26 +82,26 @@ public class FindTweets extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-        List<Tweets> tweets = new ArrayList<Tweets>();
+        List<StockCompanies> stockCompanies = new ArrayList<StockCompanies>();
         
         // Retrieve and validate name.
-        // personname is retrieved from the form POST submission. By default, it
+        // sector is retrieved from the form POST submission. By default, it
         // is populated by the URL query string (in FindUsers.jsp).
-        String personName = req.getParameter("personname");
-        if (personName == null || personName.trim().isEmpty()) {
+        String sectorName = req.getParameter("sector");
+        if (sectorName == null || sectorName.trim().isEmpty()) {
             messages.put("success", "Please enter a valid name.");
         } else {
         	// Retrieve BlogUsers, and store as a message.
         	try {
-            	tweets = tweetsDao.getTweetsByPersonName(personName);
+            	stockCompanies = stockCompaniesDao.getCompaniesBySector(sectorName);
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
             }
-        	messages.put("success", "Displaying results for " + personName);
+        	messages.put("success", "Displaying results for " + sectorName);
         }
-        req.setAttribute("tweets", tweets);
+        req.setAttribute("stockCompanies", stockCompanies);
         
-        req.getRequestDispatcher("/FindTweets.jsp").forward(req, resp);
+        req.getRequestDispatcher("/FindStockCompanies.jsp").forward(req, resp);
     }
 }

@@ -8,34 +8,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Create a StockCompanies</title>
+<title>Update a StockCompany</title>
 </head>
 <body>
-	<h1>Create StockCompanies</h1>
-	<form action="stockcompaniescreate" method="post">
+	<h1>Update StockCompany</h1>
+	<form action="stockcompaniesupdate" method="post">
 		<p>
 			<label for="companyticker">CompanyTicker</label>
-			<input id="companyticker" name="companyticker" value="">
+			<input id="companyticker" name="companyticker" value="${fn:escapeXml(param.companyticker)}">
 		</p>
 		<p>
-			<label for="company">Company</label>
+			<label for=company>New Company Name</label>
 			<input id="company" name="company" value="">
-		</p>
-		<p>
-			<label for="marketcap">MarketCap</label>
-			<input id="marketcap" name="marketcap" value="">
-		</p>
-		<p>
-			<label for="marketcapgroup">MarketCapGroup</label>
-			<input id="marketcapgroup" name="marketcapgroup" value="">
-		</p>
-		<p>
-			<label for="sector">Sector</label>
-			<input id="sector" name="sector" value="">
-		</p>
-		<p>
-			<label for="indexticker">IndexTicker</label>
-			<input id="indexticker" name="indexticker" value="">
 		</p>
 		<p>
 			<input type="submit">

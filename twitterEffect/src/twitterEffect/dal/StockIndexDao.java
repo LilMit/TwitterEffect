@@ -8,8 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import review.model.Companies;
-
 public class StockIndexDao {
 	protected ConnectionManager connectionManager;
 

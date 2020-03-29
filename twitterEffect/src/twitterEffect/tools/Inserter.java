@@ -47,6 +47,21 @@ public class Inserter {
 		Tweets tweet = new Tweets("lalal", date, time, "henloooo", 5, bob);
 		tweet = tweetsDao.create(tweet);
 		
+		StockIndex nasdaq = new StockIndex ("NASDAQ", "whatever that means");
+		nasdaq = stockindexDao.create(nasdaq);
+		
+		System.out.format("stockIndex %s %s %n", nasdaq.getIndexTicker(), nasdaq.getIndexName());
+		stockindexDao.updateIndexName(nasdaq, "NASDAQ Composite");
+		System.out.format("stockIndex %s %s %n", nasdaq.getIndexTicker(), nasdaq.getIndexName());
+		StockIndex ixic = stockindexDao.getStockIndexByIndexTicker("NASDAQ");
+		System.out.format("stockIndex %s %s %n", ixic.getIndexTicker(), ixic.getIndexName());
+		
+		List<Tweets> bobTweets = tweetsDao.getTweetsByPersonName("Bob");
+		for (Tweets t: bobTweets) {
+			System.out.format("Bob posted %s at %s on %s at %s time, %d retweets", 
+					t.getContent(), t.getLinkToTweet(), t.getTweetDate(), t.getTweetDate(), t.getRetweets());
+		}
+		
 		
 
 		

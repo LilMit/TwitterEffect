@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/**
+ * @author elaineparr
+ */
 @WebServlet("/stockindexdelete")
 public class StockIndexDelete extends HttpServlet {
 	

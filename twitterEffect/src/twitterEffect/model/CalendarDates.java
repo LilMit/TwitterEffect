@@ -1,5 +1,5 @@
 /**
- * 
+ * @author elaineparr
  */
 package twitterEffect.model;
 import java.sql.Date;
