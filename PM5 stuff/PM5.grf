@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="elaineparr" created="Sat Mar 28 11:28:29 EDT 2020" guiVersion="5.5.2.7" id="1585417359176" licenseCode="CLP1DNORTH67853669EX" name="PM5" showComponentDetails="true">
+<Global>
+<Metadata id="Metadata4">
+<Record fieldDelimiter=";" name="CurrencyExchangeRates" recordDelimiter="\n" type="delimited">
+<Field format="yyyy-MM-dd" name="RecordDate" size="10" type="date"/>
+<Field name="Australian_dollar" size="12" type="number"/>
+<Field name="Brazilian_real" size="12" type="number"/>
+<Field name="Canadian_dollar" size="12" type="number"/>
+<Field name="Swiss_franc" size="12" type="number"/>
+<Field name="Chinese_yuan_renminbi" size="12" type="number"/>
+<Field name="Czech_koruna" size="12" type="number"/>
+<Field name="Danish_krone" size="12" type="number"/>
+<Field name="UK_pound_sterling" size="12" type="number"/>
+<Field name="Hong_Kong_dollar" size="12" type="number"/>
+<Field name="Croatian_kuna" size="12" type="number"/>
+<Field name="Hungarian_forint" size="12" type="number"/>
+<Field name="Indonesian_rupiah" size="12" type="number"/>
+<Field name="Israeli_shekel" size="12" type="number"/>
+<Field name="Indian_rupee" size="12" type="number"/>
+<Field name="Iceland_krona" size="12" type="number"/>
+<Field name="Japanese_yen" size="12" type="number"/>
+<Field name="Korean_won" size="12" type="number"/>
+<Field name="Mexican_peso" size="12" type="number"/>
+<Field name="Malaysian_ringgit" size="12" type="number"/>
+<Field name="Norwegian_krone" size="12" type="number"/>
+<Field name="New_Zealand_dollar" size="12" type="number"/>
+<Field name="Philippine_peso" size="12" type="number"/>
+<Field name="Polish_zloty" size="12" type="number"/>
+<Field name="Romanian_leu" size="12" type="number"/>
+<Field name="Russian_rouble" size="12" type="number"/>
+<Field name="Swedish_krona" size="12" type="number"/>
+<Field name="Singapore_dollar" size="12" type="number"/>
+<Field name="Thai_baht" size="12" type="number"/>
+<Field name="Turkish_lira" size="12" type="number"/>
+<Field name="South_African_rand" size="12" type="number"/>
+<Field name="EU_euro" size="12" type="number"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata6">
+<Record fieldDelimiter="|" name="DailySummaryAndAvgUSD" recordDelimiter="\n" type="delimited">
+<Field name="Date" trim="true" type="date"/>
+<Field name="AvgUSD" trim="true" type="number"/>
+<Field name="AdjClosePrice" trim="true" type="number"/>
+<Field name="Grade" type="string"/>
+<Field name="Approval" trim="true" type="number"/>
+<Field name="Disapproval" trim="true" type="number"/>
+<Field name="USDvsClose" trim="true" type="number"/>
+<Field length="12" name="USD_Approve" scale="2" trim="true" type="decimal"/>
+<Field length="12" name="USD_Disapprove" scale="2" trim="true" type="decimal"/>
+<Field name="AdjClose_Approve" trim="true" type="number"/>
+<Field name="AdjClose_Disapprove" trim="true" type="number"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata5">
+<Record fieldDelimiter=";" name="IndexDailySummary" recordDelimiter="\n" type="delimited">
+<Field format="yyyy-MM-dd" name="SummaryDate" size="10" type="date"/>
+<Field name="IndexTicker" size="10" type="string"/>
+<Field name="OpenPrice" size="12" type="number"/>
+<Field name="High" size="12" type="number"/>
+<Field name="Low" size="12" type="number"/>
+<Field name="ClosePrice" size="12" type="number"/>
+<Field name="AdjClose" size="12" type="number"/>
+<Field name="Volume" size="20" type="long"/>
+<Field name="SummaryID" size="11" type="integer"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata7">
+<Record fieldDelimiter=";" name="IndexDailySummary" recordDelimiter="\n" type="delimited">
+<Field format="yyyy-MM-dd" name="SummaryDate" size="10" type="date"/>
+<Field name="IndexTicker" size="10" type="string"/>
+<Field name="OpenPrice" size="12" type="number"/>
+<Field name="High" size="12" type="number"/>
+<Field name="Low" size="12" type="number"/>
+<Field name="ClosePrice" size="12" type="number"/>
+<Field name="AdjClose" size="12" type="number"/>
+<Field name="Volume" size="20" type="long"/>
+<Field name="SummaryID" size="11" type="integer"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata8">
+<Record fieldDelimiter=";" name="IndexDailySummary" previewAttachmentCharset="UTF-8" recordDelimiter="\n" type="delimited">
+<Field format="yyyy-MM-dd" name="SummaryDate" size="10" type="date"/>
+<Field name="IndexTicker" size="10" type="string"/>
+<Field name="OpenPrice" size="12" type="number"/>
+<Field name="High" size="12" type="number"/>
+<Field name="Low" size="12" type="number"/>
+<Field name="ClosePrice" size="12" type="number"/>
+<Field name="AdjClose" size="12" type="number"/>
+<Field name="Volume" size="20" type="long"/>
+<Field name="SummaryID" size="11" type="integer"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata2">
+<Record fieldDelimiter=";" name="Ratings" previewAttachmentCharset="UTF-8" recordDelimiter="\n" type="delimited">
+<Field name="PresidentName" size="255" type="string"/>
+<Field format="yyyy-MM-dd" name="StartDate" size="10" type="date"/>
+<Field format="yyyy-MM-dd" name="EndDate" size="10" type="date"/>
+<Field name="Grade" size="5" type="string"/>
+<Field name="Approve" size="11" type="integer"/>
+<Field name="Disapprove" size="11" type="integer"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata3">
+<Record fieldDelimiter=";" name="Ratings" recordDelimiter="\n" type="delimited">
+<Field name="PresidentName" size="255" type="string"/>
+<Field format="yyyy-MM-dd" name="StartDate" size="10" type="date"/>
+<Field format="yyyy-MM-dd" name="EndDate" size="10" type="date"/>
+<Field name="Grade" size="5" type="string"/>
+<Field name="Approve" size="11" type="integer"/>
+<Field name="Disapprove" size="11" type="integer"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata1">
+<Record fieldDelimiter="|" name="recordName1" recordDelimiter="\n" type="delimited"/>
+<Sql connection="JDBC2" sqlOptimization="true" sqlQuery="select `ApprovalRatings`.`Ratings`.`PresidentName`,`ApprovalRatings`.`Ratings`.`StartDate`,`ApprovalRatings`.`Ratings`.`EndDate`,`ApprovalRatings`.`Ratings`.`Grade`,`ApprovalRatings`.`Ratings`.`Approve`,`ApprovalRatings`.`Ratings`.`Disapprove`&#10;from `ApprovalRatings`.`Ratings`" unknownJdbcTypesAsString="true"/>
+</Metadata>
+<Metadata id="Metadata0">
+<Record fieldDelimiter=";" name="Tweets" recordDelimiter="\n" type="delimited">
+<Field name="LinkToTweet" size="255" type="string"/>
+</Record>
+</Metadata>
+<Connection database="MYSQL" dbURL="jdbc:mysql://localhost:3306/ApprovalRatings?verifyServerCertificate=false&amp;useSSL=true" id="JDBC0" jdbcSpecific="MYSQL" name="ApprovalRatings" password="password" type="JDBC" user="root2"/>
+<Connection database="MYSQL" dbURL="jdbc:mysql://localhost:3306/ExchangeRates?verifyServerCertificate=false&amp;useSSL=true" id="JDBC2" jdbcSpecific="MYSQL" name="NewConnection" password="password" type="JDBC" user="root2"/>
+<Connection database="MYSQL" dbURL="jdbc:mysql://localhost:3306/TwitterEffectPM3?verifyServerCertificate=false&amp;useSSL=true" id="JDBC1" jdbcSpecific="MYSQL" name="Tweets" password="password" type="JDBC" user="root2"/>
+<GraphParameters>
+<GraphParameterFile fileURL="workspace.prm"/>
+</GraphParameters>
+<Dictionary/>
+</Global>
+<Phase number="0">
+<Node dbConnection="JDBC0" guiName="ApprovalRatings" guiX="90" guiY="281" id="APPROVAL_RATINGS" type="DB_INPUT_TABLE">
+<attr name="sqlQuery"><![CDATA[select `ApprovalRatings`.`Ratings`.`PresidentName`,`ApprovalRatings`.`Ratings`.`StartDate`,`ApprovalRatings`.`Ratings`.`EndDate`,`ApprovalRatings`.`Ratings`.`Grade`,`ApprovalRatings`.`Ratings`.`Approve`,`ApprovalRatings`.`Ratings`.`Disapprove`
+from `ApprovalRatings`.`Ratings`]]></attr>
+</Node>
+<Node dbConnection="JDBC2" guiName="Exchang Rates DatabaseReader" guiX="90" guiY="7" id="EXCHANG_RATES_DATABASE_READER" type="DB_INPUT_TABLE">
+<attr name="sqlQuery"><![CDATA[select `ExchangeRates`.`CurrencyExchangeRates`.`RecordDate`,`ExchangeRates`.`CurrencyExchangeRates`.`Australian_dollar`,`ExchangeRates`.`CurrencyExchangeRates`.`Brazilian_real`,`ExchangeRates`.`CurrencyExchangeRates`.`Canadian_dollar`,`ExchangeRates`.`CurrencyExchangeRates`.`Swiss_franc`,`ExchangeRates`.`CurrencyExchangeRates`.`Chinese_yuan_renminbi`,`ExchangeRates`.`CurrencyExchangeRates`.`Czech_koruna`,`ExchangeRates`.`CurrencyExchangeRates`.`Danish_krone`,`ExchangeRates`.`CurrencyExchangeRates`.`UK_pound_sterling`,`ExchangeRates`.`CurrencyExchangeRates`.`Hong_Kong_dollar`,`ExchangeRates`.`CurrencyExchangeRates`.`Croatian_kuna`,`ExchangeRates`.`CurrencyExchangeRates`.`Hungarian_forint`,`ExchangeRates`.`CurrencyExchangeRates`.`Indonesian_rupiah`,`ExchangeRates`.`CurrencyExchangeRates`.`Israeli_shekel`,`ExchangeRates`.`CurrencyExchangeRates`.`Indian_rupee`,`ExchangeRates`.`CurrencyExchangeRates`.`Iceland_krona`,`ExchangeRates`.`CurrencyExchangeRates`.`Japanese_yen`,`ExchangeRates`.`CurrencyExchangeRates`.`Korean_won`,`ExchangeRates`.`CurrencyExchangeRates`.`Mexican_peso`,`ExchangeRates`.`CurrencyExchangeRates`.`Malaysian_ringgit`,`ExchangeRates`.`CurrencyExchangeRates`.`Norwegian_krone`,`ExchangeRates`.`CurrencyExchangeRates`.`New_Zealand_dollar`,`ExchangeRates`.`CurrencyExchangeRates`.`Philippine_peso`,`ExchangeRates`.`CurrencyExchangeRates`.`Polish_zloty`,`ExchangeRates`.`CurrencyExchangeRates`.`Romanian_leu`,`ExchangeRates`.`CurrencyExchangeRates`.`Russian_rouble`,`ExchangeRates`.`CurrencyExchangeRates`.`Swedish_krona`,`ExchangeRates`.`CurrencyExchangeRates`.`Singapore_dollar`,`ExchangeRates`.`CurrencyExchangeRates`.`Thai_baht`,`ExchangeRates`.`CurrencyExchangeRates`.`Turkish_lira`,`ExchangeRates`.`CurrencyExchangeRates`.`South_African_rand`,`ExchangeRates`.`CurrencyExchangeRates`.`EU_euro`
+from `ExchangeRates`.`CurrencyExchangeRates`]]></attr>
+</Node>
+<Node guiName="ExtHashJoin by date" guiX="405" guiY="156" id="EXT_HASH_JOIN_BY_DATE" joinKey="$RecordDate=$SummaryDate#$RecordDate=$StartDate" joinType="inner" type="EXT_HASH_JOIN">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.Date = $in.0.RecordDate;
+	$out.0.AvgUSD = ($in.0.Australian_dollar + $in.0.Brazilian_real + $in.0.Canadian_dollar + $in.0.Swiss_franc + $in.0.Chinese_yuan_renminbi + $in.0.Czech_koruna + $in.0.Danish_krone + $in.0.UK_pound_sterling + $in.0.Hong_Kong_dollar + $in.0.Croatian_kuna + $in.0.Hungarian_forint + $in.0.Indonesian_rupiah + $in.0.Israeli_shekel + $in.0.Indian_rupee + $in.0.Iceland_krona + $in.0.Japanese_yen + $in.0.Korean_won + $in.0.Mexican_peso + $in.0.Malaysian_ringgit + $in.0.Norwegian_krone + $in.0.New_Zealand_dollar + $in.0.Philippine_peso + $in.0.Polish_zloty + $in.0.Romanian_leu + $in.0.Russian_rouble + $in.0.Swedish_krona + $in.0.Singapore_dollar + $in.0.Thai_baht + $in.0.Turkish_lira + $in.0.South_African_rand + $in.0.EU_euro)/31;
+	$out.0.AdjClosePrice = $in.1.AdjClose;
+	$out.0.Grade = $in.2.Grade;
+	$out.0.Approval = $in.2.Approve;
+	$out.0.Disapproval = $in.2.Disapprove;
+	$out.0.USDvsClose = $out.0.AvgUSD/$in.1.AdjClose;
+	$out.0.USD_Approve = $out.0.AvgUSD/$in.2.Approve;
+	$out.0.USD_Disapprove = $out.0.AvgUSD/$in.2.Disapprove;
+	$out.0.AdjClose_Approve = $in.1.AdjClose/$in.2.Approve;
+	$out.0.AdjClose_Disapprove = $in.1.AdjClose/$in.2.Disapprove;
+
+	return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Node dataPolicy="controlled" dbConnection="JDBC1" guiName="IndexDailySummary" guiX="90" guiY="166" id="INDEX_DAILY_SUMMARY" type="DB_INPUT_TABLE">
+<attr name="sqlQuery"><![CDATA[select * from `TwitterEffectPM3`.`IndexDailySummary`]]></attr>
+</Node>
+<Node existingSheetsActions="DO_NOTHING" fileURL="${DATAOUT_DIR}/exrates_ids_approval.xlsx" guiName="SpreadsheetDataWriter" guiX="665" guiY="112" id="SPREADSHEET_DATA_WRITER" type="SPREADSHEET_WRITER" writeMode="OVERWRITE_SHEET_IN_MEMORY">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mapping>
+    <globalAttributes>
+        <orientation>VERTICAL</orientation>
+        <step>1</step>
+        <writeHeader>true</writeHeader>
+    </globalAttributes>
+    <defaultSkip>1</defaultSkip>
+    <headerGroups/>
+</mapping>
+]]></attr>
+</Node>
+<Edge fromNode="APPROVAL_RATINGS:0" guiBendpoints="" guiRouter="Manhattan" id="Edge10" inPort="Port 2 (slave)" metadata="Metadata2" outPort="Port 0 (out)" toNode="EXT_HASH_JOIN_BY_DATE:2"/>
+<Edge fromNode="EXCHANG_RATES_DATABASE_READER:0" guiBendpoints="" guiRouter="Manhattan" id="Edge5" inPort="Port 0 (driver)" metadata="Metadata4" outPort="Port 0 (out)" toNode="EXT_HASH_JOIN_BY_DATE:0"/>
+<Edge fromNode="EXT_HASH_JOIN_BY_DATE:0" guiBendpoints="" guiRouter="Manhattan" id="Edge14" inPort="Port 0 (input)" metadata="Metadata6" outPort="Port 0 (out)" toNode="SPREADSHEET_DATA_WRITER:0"/>
+<Edge fromNode="INDEX_DAILY_SUMMARY:0" guiBendpoints="" guiRouter="Manhattan" id="Edge8" inPort="Port 1 (slave)" metadata="Metadata8" outPort="Port 0 (out)" toNode="EXT_HASH_JOIN_BY_DATE:1"/>
+</Phase>
+</Graph>
