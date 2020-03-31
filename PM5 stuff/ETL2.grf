@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="shruthiraghuraman" created="Thu Mar 26 18:09:47 EDT 2020" guiVersion="5.6.0.16" id="1585539878684" licenseCode="Unlicensed" name="ETL2" showComponentDetails="true">
+<Global>
+<Metadata id="Metadata3">
+<Record fieldDelimiter="|" name="Combined_Table" previewAttachmentCharset="UTF-8" recordDelimiter="\n" type="delimited">
+<Field name="Date" type="date"/>
+<Field name="US_China_ratio" type="decimal"/>
+<Field name="US_India_ratio" type="decimal"/>
+<Field name="ClosePrice" type="decimal"/>
+<Field name="StockVolume" type="long"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata1">
+<Record fieldDelimiter=";" name="CurrencyExchangeRates" recordDelimiter="\n" type="delimited">
+<Field name="RecordId" size="11" type="integer"/>
+<Field format="yyyy-MM-dd" name="RecordDate" size="10" type="date"/>
+<Field name="Australian_dollar" size="12" type="number"/>
+<Field name="Brazilian_real" size="12" type="number"/>
+<Field name="Canadian_dollar" size="12" type="number"/>
+<Field name="Swiss_franc" size="12" type="number"/>
+<Field name="Chinese_yuan_renminbi" size="12" type="number"/>
+<Field name="Czech_koruna" size="12" type="number"/>
+<Field name="Danish_krone" size="12" type="number"/>
+<Field name="UK_pound_sterling" size="12" type="number"/>
+<Field name="Hong_Kong_dollar" size="12" type="number"/>
+<Field name="Croatian_kuna" size="12" type="number"/>
+<Field name="Hungarian_forint" size="12" type="number"/>
+<Field name="Indonesian_rupiah" size="12" type="number"/>
+<Field name="Israeli_shekel" size="12" type="number"/>
+<Field name="Indian_rupee" size="12" type="number"/>
+<Field name="Iceland_krona" size="12" type="number"/>
+<Field name="Japanese_yen" size="12" type="number"/>
+<Field name="Korean_won" size="12" type="number"/>
+<Field name="Mexican_peso" size="12" type="number"/>
+<Field name="Malaysian_ringgit" size="12" type="number"/>
+<Field name="Norwegian_krone" size="12" type="number"/>
+<Field name="New_Zealand_dollar" size="12" type="number"/>
+<Field name="Philippine_peso" size="12" type="number"/>
+<Field name="Polish_zloty" size="12" type="number"/>
+<Field name="Romanian_leu" size="12" type="number"/>
+<Field name="Russian_rouble" size="12" type="number"/>
+<Field name="Swedish_krona" size="12" type="number"/>
+<Field name="Singapore_dollar" size="12" type="number"/>
+<Field name="Thai_baht" size="12" type="number"/>
+<Field name="Turkish_lira" size="12" type="number"/>
+<Field name="US_dollar" size="12" type="number"/>
+<Field name="South_African_rand" size="12" type="number"/>
+<Field name="EU_euro" size="12" type="number"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata0">
+<Record fieldDelimiter="|" name="CurrencyExchangeRates" previewAttachmentCharset="UTF-8" recordDelimiter="\n" type="delimited">
+<Field name="RecordId" type="integer"/>
+<Field name="RecordDate" type="date"/>
+<Field name="Chinese_yuan_renminbi" type="decimal"/>
+<Field name="Indian_rupee" type="decimal"/>
+<Field name="US_dollar" type="decimal"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata6">
+<Record fieldDelimiter="|" name="GetApprovalInfo" previewAttachmentCharset="UTF-8" recordDelimiter="\n" type="delimited">
+<Field name="PresidentName" type="string"/>
+<Field name="Approval" type="integer"/>
+<Field name="Disapproval" type="integer"/>
+<Field name="CreatedDate" type="date"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata4">
+<Record fieldDelimiter="|" name="GetTweetInfo" previewAttachmentCharset="UTF-8" recordDelimiter="\n" type="delimited">
+<Field name="TweetDate" type="date"/>
+<Field name="Retweets" type="integer"/>
+<Field name="PersonName" type="string"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata2">
+<Record fieldDelimiter="|" name="StockIndexDailySummary" recordDelimiter="\n" type="delimited">
+<Field name="SummaryDate" type="date"/>
+<Field name="ClosePrice" type="decimal"/>
+<Field name="Volume" type="long"/>
+<Field name="SummaryId" type="integer"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata7">
+<Record fieldDelimiter="|" name="TrumpTweetApprovalSummary" previewAttachmentCharset="UTF-8" recordDelimiter="\n" type="delimited">
+<Field name="Date" type="date"/>
+<Field name="NumberOfTweets" type="integer"/>
+<Field name="SumOfRetweets" type="integer"/>
+<Field name="Approval" type="integer"/>
+<Field name="Disapproval" type="integer"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata5">
+<Record fieldDelimiter="|" name="TweetsByDay" previewAttachmentCharset="UTF-8" recordDelimiter="\n" type="delimited">
+<Field name="Date" type="date"/>
+<Field name="NumOfTweets" type="integer"/>
+<Field name="SumOfRetweetsPerDay" type="integer"/>
+</Record>
+</Metadata>
+<Connection database="MYSQL" dbURL="jdbc:mysql://localhost:3306/BlogApplication?verifyServerCertificate=false&amp;useSSL=true" id="JDBC0" jdbcSpecific="MYSQL" name="PM5Connection" password="Chicatwabee2!" type="JDBC" user="root"/>
+<GraphParameters>
+<GraphParameterFile fileURL="workspace.prm"/>
+</GraphParameters>
+<Dictionary/>
+</Global>
+<Phase number="0">
+<Node aggregateKey="TweetDate" guiName="Aggregate" guiX="670" guiY="435" id="AGGREGATE" mapping="$Date:=$TweetDate;$NumOfTweets:=count();$SumOfRetweetsPerDay:=sum($Retweets);" type="AGGREGATE" yy=""/>
+<Node dbConnection="JDBC0" guiName="DatabaseReader" guiX="118" guiY="234" id="DATABASE_READER" type="DB_INPUT_TABLE">
+<attr name="sqlQuery"><![CDATA[select `ExchangeRates`.`CurrencyExchangeRates`.`RecordId`,`ExchangeRates`.`CurrencyExchangeRates`.`RecordDate`,`ExchangeRates`.`CurrencyExchangeRates`.`Chinese_yuan_renminbi`,`ExchangeRates`.`CurrencyExchangeRates`.`Indian_rupee`,`ExchangeRates`.`CurrencyExchangeRates`.`US_dollar`
+from `ExchangeRates`.`CurrencyExchangeRates`]]></attr>
+</Node>
+<Node dbConnection="JDBC0" guiName="DatabaseReader" guiX="112" guiY="131" id="DATABASE_READER1" type="DB_INPUT_TABLE">
+<attr name="sqlQuery"><![CDATA[select `TwitterEffectPM3`.`IndexDailySummary`.`SummaryDate`,`TwitterEffectPM3`.`IndexDailySummary`.`ClosePrice`,`TwitterEffectPM3`.`IndexDailySummary`.`Volume`,`TwitterEffectPM3`.`IndexDailySummary`.`SummaryID`
+from `TwitterEffectPM3`.`IndexDailySummary`]]></attr>
+</Node>
+<Node dbConnection="JDBC0" guiName="DatabaseReader" guiX="124" guiY="435" id="DATABASE_READER2" type="DB_INPUT_TABLE">
+<attr name="sqlQuery"><![CDATA[select `TwitterEffectPM3`.`Tweets`.`TweetDate`,`TwitterEffectPM3`.`Tweets`.`Retweets`,`TwitterEffectPM3`.`Tweets`.`PersonName`
+from `TwitterEffectPM3`.`Tweets`]]></attr>
+</Node>
+<Node dbConnection="JDBC0" guiName="DatabaseReader" guiX="731" guiY="549" id="DATABASE_READER3" type="DB_INPUT_TABLE">
+<attr name="sqlQuery"><![CDATA[select `ApprovalRatings`.`Ratings`.`PresidentName`,`ApprovalRatings`.`Ratings`.`Approve`,`ApprovalRatings`.`Ratings`.`Disapprove`,`ApprovalRatings`.`Ratings`.`CreateDate`
+from `ApprovalRatings`.`Ratings`]]></attr>
+</Node>
+<Node guiName="ExtHashJoin" guiX="335" guiY="131" id="EXT_HASH_JOIN" joinKey="$SummaryDate=$RecordDate" joinType="inner" type="EXT_HASH_JOIN">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.Date = $in.0.SummaryDate;
+	$out.0.ClosePrice = $in.0.ClosePrice;
+	$out.0.StockVolume = $in.0.Volume;
+	$out.0.US_China_ratio = ($in.1.US_dollar/$in.1.Chinese_yuan_renminbi)*100;
+	$out.0.US_India_ratio = ($in.1.US_dollar/$in.1.Indian_rupee)*100;
+
+	return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Node guiName="ExtHashJoin" guiX="905" guiY="466" id="EXT_HASH_JOIN1" joinKey="$Date=$CreatedDate" type="EXT_HASH_JOIN">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.NumberOfTweets = $in.0.NumOfTweets;
+	$out.0.SumOfRetweets = $in.0.SumOfRetweetsPerDay;
+	$out.0.Approval = $in.1.Approval;
+	$out.0.Disapproval = $in.1.Disapproval;
+	$out.0.Date = $in.1.CreatedDate;
+
+	return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Node guiName="ExtSort" guiX="543" guiY="563" id="EXT_SORT" sortKey="TweetDate(a)" type="EXT_SORT"/>
+<Node guiName="Filter" guiX="379" guiY="298" id="FILTER" type="EXT_FILTER">
+<attr name="filterExpression"><![CDATA[//#CTL2
+dateDiff(today(),$in.0.Date,year) < 2
+]]></attr>
+</Node>
+<Node guiName="Filter" guiX="410" guiY="435" id="FILTER1" type="EXT_FILTER">
+<attr name="filterExpression"><![CDATA[//#CTL2
+$in.0.PersonName == 'Donald Trump']]></attr>
+</Node>
+<Node existingSheetsActions="REMOVE_SHEETS" fileURL="${DATAOUT_DIR}/out1.xlsx" guiName="SpreadsheetDataWriter" guiX="696" guiY="221" id="SPREADSHEET_DATA_WRITER" sheet="Sheet0" type="SPREADSHEET_WRITER" writeMode="OVERWRITE_SHEET_IN_MEMORY">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mapping>
+    <globalAttributes>
+        <orientation>VERTICAL</orientation>
+        <step>1</step>
+        <writeHeader>true</writeHeader>
+    </globalAttributes>
+    <defaultSkip>1</defaultSkip>
+    <headerGroups>
+        <headerGroup skip="1">
+            <cloverField>Date</cloverField>
+            <headerRanges>
+                <headerRange begin="A1"/>
+            </headerRanges>
+        </headerGroup>
+        <headerGroup skip="1">
+            <cloverField>US_China_ratio</cloverField>
+            <headerRanges>
+                <headerRange begin="B1"/>
+            </headerRanges>
+        </headerGroup>
+        <headerGroup skip="1">
+            <cloverField>US_India_ratio</cloverField>
+            <headerRanges>
+                <headerRange begin="C1"/>
+            </headerRanges>
+        </headerGroup>
+        <headerGroup skip="1">
+            <cloverField>ClosePrice</cloverField>
+            <headerRanges>
+                <headerRange begin="D1"/>
+            </headerRanges>
+        </headerGroup>
+        <headerGroup skip="1">
+            <cloverField>StockVolume</cloverField>
+            <headerRanges>
+                <headerRange begin="E1"/>
+            </headerRanges>
+        </headerGroup>
+    </headerGroups>
+</mapping>
+]]></attr>
+</Node>
+<Node existingSheetsActions="REMOVE_SHEETS" fileURL="${DATAOUT_DIR}/out2.xlsx" guiName="SpreadsheetDataWriter" guiX="928" guiY="348" id="SPREADSHEET_DATA_WRITER1" sheet="Sheet0" type="SPREADSHEET_WRITER" writeMode="OVERWRITE_SHEET_IN_MEMORY">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mapping>
+    <globalAttributes>
+        <orientation>VERTICAL</orientation>
+        <step>1</step>
+        <writeHeader>true</writeHeader>
+    </globalAttributes>
+    <defaultSkip>1</defaultSkip>
+    <headerGroups>
+        <headerGroup skip="1">
+            <cloverField>Date</cloverField>
+            <headerRanges>
+                <headerRange begin="A1"/>
+            </headerRanges>
+        </headerGroup>
+        <headerGroup skip="1">
+            <cloverField>NumberOfTweets</cloverField>
+            <headerRanges>
+                <headerRange begin="B1"/>
+            </headerRanges>
+        </headerGroup>
+        <headerGroup skip="1">
+            <cloverField>SumOfRetweets</cloverField>
+            <headerRanges>
+                <headerRange begin="C1"/>
+            </headerRanges>
+        </headerGroup>
+        <headerGroup skip="1">
+            <cloverField>Approval</cloverField>
+            <headerRanges>
+                <headerRange begin="D1"/>
+            </headerRanges>
+        </headerGroup>
+        <headerGroup skip="1">
+            <cloverField>Disapproval</cloverField>
+            <headerRanges>
+                <headerRange begin="E1"/>
+            </headerRanges>
+        </headerGroup>
+    </headerGroups>
+</mapping>
+]]></attr>
+</Node>
+<Node debugPrint="true" guiName="Trash" guiX="670" guiY="348" id="TRASH" type="TRASH"/>
+<Edge fromNode="AGGREGATE:0" guiBendpoints="" guiRouter="Manhattan" id="Edge6" inPort="Port 0 (driver)" metadata="Metadata5" outPort="Port 0 (out)" toNode="EXT_HASH_JOIN1:0"/>
+<Edge fromNode="DATABASE_READER:0" guiBendpoints="" guiRouter="Manhattan" id="Edge0" inPort="Port 1 (slave)" metadata="Metadata0" outPort="Port 0 (out)" toNode="EXT_HASH_JOIN:1"/>
+<Edge fromNode="DATABASE_READER1:0" guiBendpoints="" guiRouter="Manhattan" id="Edge1" inPort="Port 0 (driver)" metadata="Metadata2" outPort="Port 0 (out)" toNode="EXT_HASH_JOIN:0"/>
+<Edge fromNode="DATABASE_READER2:0" guiBendpoints="" guiRouter="Manhattan" id="Edge4" inPort="Port 0 (in)" metadata="Metadata4" outPort="Port 0 (out)" toNode="FILTER1:0"/>
+<Edge fromNode="DATABASE_READER3:0" guiBendpoints="" guiRouter="Manhattan" id="Edge8" inPort="Port 1 (slave)" metadata="Metadata6" outPort="Port 0 (out)" toNode="EXT_HASH_JOIN1:1"/>
+<Edge fromNode="EXT_HASH_JOIN:0" guiBendpoints="" guiRouter="Manhattan" id="Edge2" inPort="Port 0 (in)" metadata="Metadata3" outPort="Port 0 (out)" toNode="FILTER:0"/>
+<Edge fromNode="EXT_HASH_JOIN1:0" guiBendpoints="" guiRouter="Manhattan" id="Edge9" inPort="Port 0 (input)" metadata="Metadata7" outPort="Port 0 (out)" toNode="SPREADSHEET_DATA_WRITER1:0"/>
+<Edge fromNode="EXT_HASH_JOIN1:1" guiBendpoints="" guiRouter="Manhattan" id="Edge13" inPort="Port 0 (in)" outPort="Port 1 (out)" toNode="TRASH:0"/>
+<Edge fromNode="EXT_SORT:0" guiBendpoints="" guiRouter="Manhattan" id="Edge7" inPort="Port 0 (in)" outPort="Port 0 (out)" toNode="AGGREGATE:0"/>
+<Edge fromNode="FILTER:0" guiBendpoints="" guiRouter="Manhattan" id="Edge3" inPort="Port 0 (input)" outPort="Port 0 (accepted)" toNode="SPREADSHEET_DATA_WRITER:0"/>
+<Edge fromNode="FILTER1:0" guiBendpoints="" guiRouter="Manhattan" id="Edge5" inPort="Port 0 (in)" outPort="Port 0 (accepted)" toNode="EXT_SORT:0"/>
+</Phase>
+</Graph>
